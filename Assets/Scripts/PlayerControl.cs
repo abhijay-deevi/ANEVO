@@ -9,21 +9,22 @@ public class PlayerControl : MonoBehaviour
 
     public float speed = 5;
     public Rigidbody2D rb;
+    public Animator animator;
 
-    [HideInInspector] public Vector2 lastMovement = Vector2.down; // Default Position
-    void FixedUpdate()
+    Vector2 movement; // stores x, y
+
+    private void Update()
     {
-        float horizontal, vertical;
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        Vector2 movement = new Vector2(horizontal, vertical);
-        rb.linearVelocity = movement * speed;
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude); // performance trick
+    }
 
-        // Updates last direction
-        if (movement != Vector2.zero)
-        {
-            lastMovement = movement.normalized; // Always length 1
-        }
+    private void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
     }
 }
