@@ -12,8 +12,8 @@ public class Scratch : MonoBehaviour, IAttack
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            Debug.Log("Got one!");
             enemy.GetComponent<EnemyHealth>()?.TakeDamage(damage);
+
         }
 
         
