@@ -17,6 +17,9 @@ MonoBehaviour:
   chargeTime: 0.6
   explosionRadius: 2.2
   damage: 30
+  maxChargeTime: 0.25
+  arriveEpsilon: 0.05
+  explodeDelay: 0.15
   damageMask:
     serializedVersion: 2
     m_Bits: 8

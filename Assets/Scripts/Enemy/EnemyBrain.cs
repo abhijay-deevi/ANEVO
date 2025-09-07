@@ -47,6 +47,12 @@ public class EnemyBrain : MonoBehaviour
         {
             StartCoroutine(RunAttack(aimDir));
         }
+
+        if (movement.ShouldAttack(out _))
+        {
+            Vector2 lockedPoint = target.position;
+            StartCoroutine(RunAttack(lockedPoint));
+        }
     }
 
     private void FixedUpdate()
