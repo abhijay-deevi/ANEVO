@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerControl : MonoBehaviour
     
@@ -12,7 +13,11 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
 
     Vector2 movement; // stores x, y
+
+    // Health Stuff
     private Health health;
+    public Image healthBar;
+
 
     void Awake()
     {
@@ -60,5 +65,6 @@ public class PlayerControl : MonoBehaviour
     private void HandleHealthChanged(int current, int max)
     {
         // Add UI health bar, show damage on the sprite (redden it), etc
+        healthBar.fillAmount = current / 100f;
     }
 }
