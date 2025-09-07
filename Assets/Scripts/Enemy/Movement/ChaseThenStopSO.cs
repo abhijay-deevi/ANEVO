@@ -33,7 +33,7 @@ public class ChaseThenStopSO : MovementBehaviorSO
         public override void Tick(float dt)
         {
             var t = getTarget();
-            if (t != null)
+            if (t == null)
             {
                 return;
             }

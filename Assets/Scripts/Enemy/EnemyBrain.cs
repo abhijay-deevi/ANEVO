@@ -43,12 +43,16 @@ public class EnemyBrain : MonoBehaviour
     {
         if (!target || isAttacking) return;
 
-        movement.Tick(Time.deltaTime);
-
         if (movement.ShouldAttack(out var aimDir))
         {
             StartCoroutine(RunAttack(aimDir));
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!target || isAttacking) return;
+        movement.Tick(Time.fixedDeltaTime);
     }
 
     private IEnumerator RunAttack(Vector2 aimDir)
