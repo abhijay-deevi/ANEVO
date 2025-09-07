@@ -19,7 +19,7 @@ MonoBehaviour:
   damage: 30
   maxChargeTime: 0.25
   arriveEpsilon: 0.05
-  explodeDelay: 0.5
+  explodeDelay: 0.45
   explodeTrigger: Explode
   explosionScale: 0.7
   damageMask:

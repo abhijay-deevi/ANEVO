@@ -162,6 +162,7 @@ GameObject:
   - component: {fileID: 318481752}
   - component: {fileID: 318481751}
   - component: {fileID: 318481750}
+  - component: {fileID: 318481755}
   - component: {fileID: 318481749}
   - component: {fileID: 318481754}
   m_Layer: 6
@@ -353,6 +354,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &318481755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 318481748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e052c8d02636f4ab21dec08e32b542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 50
+  invulnSeconds: 0.5
+  destroyOnDeath: 1
 --- !u!1 &639109699
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,10 +454,10 @@ GameObject:
   m_Component:
   - component: {fileID: 740997082}
   - component: {fileID: 740997081}
-  - component: {fileID: 740997088}
-  - component: {fileID: 740997080}
   - component: {fileID: 740997079}
   - component: {fileID: 740997083}
+  - component: {fileID: 740997088}
+  - component: {fileID: 740997080}
   - component: {fileID: 740997084}
   - component: {fileID: 740997087}
   - component: {fileID: 740997085}

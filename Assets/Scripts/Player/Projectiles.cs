@@ -4,7 +4,7 @@ public class Projectiles : MonoBehaviour
 {
     public float speed;
     public float lifeTime;
-    public float damage;
+    public int damage;
 
     public LayerMask enemyLayer;
     public GameObject destroyEffect;
@@ -33,7 +33,7 @@ public class Projectiles : MonoBehaviour
         {
             if (hitInfo.collider.CompareTag("Enemy"))
             {
-                EnemyHealth enemy = hitInfo.collider.GetComponent<EnemyHealth>();
+                var enemy = hitInfo.collider.GetComponent<Health>();
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage);

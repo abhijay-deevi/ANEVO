@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     public Image healthBar;
 
 
+    // Basically our constructor
     void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
@@ -37,6 +38,7 @@ public class PlayerControl : MonoBehaviour
         health.OnHealthChanged -= HandleHealthChanged;
     }
 
+    // Movement
     private void Update()
     {
         if (health.isDead) return;
@@ -49,6 +51,7 @@ public class PlayerControl : MonoBehaviour
         animator.SetFloat("Speed", movement.sqrMagnitude); // performance trick
     }
 
+    // Movement
     private void FixedUpdate()
     {
         if (health.isDead) return;
