@@ -15,6 +15,9 @@ public class SelfDestructChargeSO : AttackBehaviorSO
     public float arriveEpsilon = 0.05f; // how close is arrived
     public float explodeDelay = 0.15f; // Wait before applying damage
 
+    public string explodeTrigger = "Explode";
+    public float explosionScale = 0.7f;
+
 
     public LayerMask damageMask;
     public GameObject vfx;
@@ -33,11 +36,17 @@ public class SelfDestructChargeSO : AttackBehaviorSO
             this.so = so;
         }
 
+        private Animator animator;
+        private Transform gfx;
+
         public override void Init(Transform self, Func<Transform> targetGetter)
         {
             this.self = self;
             this.getTarget = targetGetter;
             rb = self.GetComponent<Rigidbody2D>();
+            animator = self.GetComponent<Animator>();
+            var sr = self.GetComponent<SpriteRenderer>();
+            if (sr) gfx = sr.transform;
         }
 
         public override IEnumerator Execute(Vector2 lockedPoint, System.Action onFinished, System.Action onExplodeSelf)
@@ -79,8 +88,11 @@ public class SelfDestructChargeSO : AttackBehaviorSO
             }
 
             // 4) (optional) tiny pause to sync with animation; damage happens AFTER
+            if (gfx && so.explosionScale > 0f) gfx.localScale = Vector3.one * so.explosionScale;
+            if (animator && !string.IsNullOrEmpty(so.explodeTrigger)) animator.SetTrigger(so.explodeTrigger);
             if (so.explodeDelay > 0f)
                 yield return new WaitForSeconds(so.explodeDelay);
+
 
             // 5) apply damage once at the explosion point
             var hits = Physics2D.OverlapCircleAll(self.position, so.explosionRadius, so.damageMask);

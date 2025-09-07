@@ -13,13 +13,15 @@ MonoBehaviour:
   m_Name: SelfDestructCharge
   m_EditorClassIdentifier: 
   windup: 1
-  chargeSpeed: 14
+  chargeSpeed: 20
   chargeTime: 0.6
   explosionRadius: 2.2
   damage: 30
   maxChargeTime: 0.25
   arriveEpsilon: 0.05
-  explodeDelay: 0.15
+  explodeDelay: 0.5
+  explodeTrigger: Explode
+  explosionScale: 0.7
   damageMask:
     serializedVersion: 2
     m_Bits: 8
