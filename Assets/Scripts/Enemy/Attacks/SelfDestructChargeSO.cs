@@ -13,7 +13,7 @@ public class SelfDestructChargeSO : AttackBehaviorSO
 
     public float maxChargeTime = 0.2f; // cap on duration
     public float arriveEpsilon = 0.05f; // how close is arrived
-    public float explodeDelay = 0f; // Wait before applying damage
+    public float explodeDelay = 0.15f; // Wait before applying damage
 
     public string explodeTrigger = "Explode";
     public float explosionScale = 0.7f;

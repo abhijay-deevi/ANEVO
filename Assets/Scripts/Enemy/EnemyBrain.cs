@@ -80,7 +80,6 @@ public class EnemyBrain : MonoBehaviour
     private void Die(bool fromAttack)
     {
         //if (!definition.deathVFX) Instantiate(definition.deathVFX, transform.position, Quaternion.identity);
-        Debug.Log("destroyed");
         Destroy(gameObject);
     }
 
