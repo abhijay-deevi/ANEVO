@@ -22,6 +22,20 @@ public class AnimalController : MonoBehaviour
             (attacks[0] as IAttack)?.performAttack(target);
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha0)) // Testing Attack to see what damage does.  
+        {
+            var player = GameObject.Find("Player");
+            var hp = player.GetComponent<Health>();
+            if (hp) hp.TakeDamage(10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9)) // Testing Attack to see what damage does.  
+        {
+            var player = GameObject.Find("Player");
+            var hp = player.GetComponent<Health>();
+            if (hp) hp.Heal(10);
+        }
+
         // Special Attacks
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

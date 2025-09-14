@@ -11,6 +11,7 @@ public class PlayerControl : MonoBehaviour
 {
 
     public float speed = 5;
+    public float redtime = 0.1f;
     public Rigidbody2D rb;
     public Animator animator;
 
@@ -19,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     // Health Stuff
     private Health health;
     public Image healthBar;
+    private float prevHealth = -5f;
 
     // Where the melee attacks should hit
     public Transform triangle;
@@ -26,7 +28,12 @@ public class PlayerControl : MonoBehaviour
     public Vector3 frontalAttackOffset = new Vector3(5, 0, 0);
     private SpriteRenderer fas;
 
- 
+    // Flashing Color Effects
+    private SpriteRenderer sr;
+    private Color redden = Color.red;
+    private Color greenden = Color.green;
+    private Color originalColor = Color.white;
+
 
     // Basically our constructor
     void Awake()
@@ -34,6 +41,7 @@ public class PlayerControl : MonoBehaviour
         if (!rb) rb = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
         if (frontattack) fas = frontattack.GetComponent<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void OnEnable() // Setting up Observer Pattern
@@ -89,10 +97,27 @@ public class PlayerControl : MonoBehaviour
         // Trigger Game over Scence and allow for restart (roguelike means ur dead!) -- could add revive items here too
     }
 
-    private void HandleHealthChanged(int current, int max)
+    private void HandleHealthChanged(float current, float max)
     {
         // Add UI health bar, show damage on the sprite (redden it), etc
-        healthBar.fillAmount = current / 100f;
+        healthBar.fillAmount = current / max;
+
+        if (prevHealth == -5)
+        {
+            prevHealth = current;
+            return;
+        }
+        
+        if (prevHealth > current)
+        {
+            StartCoroutine(Flash(redden));
+        } else if (prevHealth < current)
+        {
+            StartCoroutine(Flash(greenden));
+        }
+        
+        prevHealth = current;
+                
     }
 
     private void OnDrawGizmos()
@@ -101,5 +126,12 @@ public class PlayerControl : MonoBehaviour
         float range = scratch.range;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
+    }
+
+    private IEnumerator Flash(Color flashColor)
+    {
+        sr.color = flashColor;
+        yield return new WaitForSeconds(redtime);
+        sr.color = originalColor;
     }
 }

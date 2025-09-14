@@ -510,11 +510,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  redtime: 0.1
   rb: {fileID: 740997079}
   animator: {fileID: 740997086}
   healthBar: {fileID: 2080380634}
   triangle: {fileID: 1764548369}
   frontattack: {fileID: 1254388179}
+  frontalAttackOffset: {x: 5, y: 0, z: 0}
 --- !u!212 &740997081
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1446,7 +1448,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

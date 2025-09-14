@@ -6,19 +6,19 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
 
-    [SerializeField] private int maxHP = 100;
+    [SerializeField] private float maxHP = 100f;
     [SerializeField] private float invulnSeconds = 0.5f;
     [SerializeField] private bool destroyOnDeath = false;
 
-    private int hp;
+    private float hp;
     private bool invulnerable;
     private bool dead;
 
-    public event Action<int, int> OnHealthChanged; // Observer pattern 
+    public event Action<float, float> OnHealthChanged; // Observer pattern 
     public event Action OnDied;
 
-    public int Current => hp;
-    public int Max => maxHP;
+    public float Current => hp;
+    public float Max => maxHP;
     public bool isDead => dead;
 
     private void Awake()
