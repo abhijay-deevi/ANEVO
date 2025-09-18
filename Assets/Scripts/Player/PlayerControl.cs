@@ -87,7 +87,8 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         if (health.isDead) return;
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        // rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        rb.linearVelocity = new Vector2(movement.x * speed, movement.y * speed);
     }
 
     private void HandleDeath()
