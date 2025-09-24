@@ -16,6 +16,7 @@ public class PlayerControl : MonoBehaviour
     public Animator animator;
 
     Vector2 movement; // stores x, y
+    Vector2 last = Vector2.down;
 
     // Health Stuff
     private Health health;
@@ -64,9 +65,17 @@ public class PlayerControl : MonoBehaviour
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
+        if (movement.sqrMagnitude > 0.0001f) last = movement;
+
         animator.SetFloat("Horizontal", movement.x);
         animator.SetFloat("Vertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude); // performance trick
+
+        // Sets the idle position depending on last used key
+        animator.SetFloat("LastX", Mathf.Abs(last.x) > 0.01f ? Mathf.Sign(last.x) : 0f);
+        animator.SetFloat("LastY", Mathf.Abs(last.y) > 0.01f ? Mathf.Sign(last.y) : 0f);
+
+
 
         // Switches the position of our attack circle
         if (movement.x > 0)
