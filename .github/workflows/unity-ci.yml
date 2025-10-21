@@ -1,0 +1,66 @@
+name: Unity CI (test & build)
+
+
+on:
+push:
+branches: [ main, develop ]
+pull_request:
+
+
+jobs:
+test-and-build:
+runs-on: ubuntu-latest
+timeout-minutes: 60
+
+
+steps:
+- name: Checkout
+uses: actions/checkout@v4
+with:
+lfs: true
+
+
+# Speed up subsequent runs by caching the Library folder
+- name: Cache Library
+uses: actions/cache@v4
+with:
+path: Library
+key: Library-${{ runner.os }}-${{ hashFiles('**/*.cs', 'Packages/manifest.json', 'Packages/packages-lock.json') }}
+restore-keys: |
+Library-${{ runner.os }}-
+
+
+- name: Run EditMode & PlayMode tests
+uses: game-ci/unity-test-runner@v4
+env:
+UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+with:
+unityVersion: 6000.0.32f1 # ← set to your exact version
+testMode: all
+artifactsPath: TestResults
+
+
+- name: Upload Test Results
+if: always()
+uses: actions/upload-artifact@v4
+with:
+name: TestResults
+path: TestResults
+
+
+- name: Build Windows (Win64)
+uses: game-ci/unity-builder@v4
+env:
+UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+with:
+unityVersion: 6000.0.32f1 # ← set to your exact version
+targetPlatform: StandaloneWindows64
+buildName: YourGame
+# Optional: projectPath: . # if your Unity project is in the repo root
+
+
+- name: Upload Build Artifact
+uses: actions/upload-artifact@v4
+with:
+name: Win64-Build
+path: build/StandaloneWindows64
